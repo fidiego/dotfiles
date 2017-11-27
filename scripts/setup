@@ -1,3 +1,10 @@
 
+echo ""
+echo " *** setting up vim configs *** "
+echo ""
 ./scripts/setup_vim
+
+echo ""
+echo " *** setting up tmux configs *** "
+echo ""
 ./scripts/setup_tmux

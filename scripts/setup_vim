@@ -1,8 +1,6 @@
 #!/bin/sh
 
-echo " *** setting up vim noise *** "
-echo ""
-
+echo "   * ~/.vim"
 mkdir ~/.vim
 
 echo "   * .vimrc"
@@ -10,4 +8,4 @@ cp ./vim/vimrc ~/.vimrc
 
 echo "   * colors "
 
-tree ~/.vim
+ls ~/.vim
