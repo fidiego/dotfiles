@@ -1,0 +1,11 @@
+export PATH="/Applications/Postgres.app/Contents/Versions/9.4/bin/:$PATH"
+export PATH="/buzzfeed/bin:$PATH"
+export PATH="/buzzfeed/local/bin:$PATH"
+export PATH="/usr/local/bin:$PATH"
+export PATH="/usr/local/go/bin:$PATH"
+export PATH="/usr/local/sbin:$PATH"
+export PATH="~/bin/:$PATH"
+export PATH="/usr/local/Cellar/gnupg/2.0.30_3/bin:$PATH"
+export PATH="/usr/local/lib/python3.6/site-packages:$PATH"
+export PATH="/.cargo/bin:$PATH"
+
