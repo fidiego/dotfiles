@@ -1,0 +1,155 @@
+" -----
+" .vimrc
+"
+" sets up vundle and install plugins
+" also sets some language specific
+" things like indenting and syntax highlighting
+"
+
+set nocompatible               " be iMproved
+filetype off                   " required!
+
+" Vundle: package management
+set rtp+=~/.vim/bundle/Vundle.vim/
+call vundle#rc()
+
+" somewhat meta
+Bundle 'gmarik/vundle'
+
+" other plugins
+Bundle 'christoomey/vim-tmux-navigator'
+Bundle 'scrooloose/nerdtree'
+Bundle 'luochen1990/rainbow'
+Bundle 'kien/rainbow_parentheses'
+Bundle 'vim-syntastic/syntastic'
+Bundle 'plasticboy/vim-markdown'
+Bundle 'mxw/vim-jsx'
+Bundle 'pangloss/vim-javascript'
+
+""" General
+colorscheme monokai
+
+
+" leader
+" follow the leader
+let mapleader = ","
+let g:mapleader = ","
+
+" never in my life have i used ex mode
+" i'm not sure what it is and at this point i'm too afraid to ask
+nnoremap Q <nop>
+
+" ruler
+set ruler
+
+" set line under cursor
+set cursorline
+
+" copy to clipboard
+set clipboard=unnamed
+
+" fold
+set foldmethod=indent
+set foldlevel=99
+nnoremap <space> za
+
+" turn highlighting on
+set hlsearch
+
+" autoread/autoreload changed files
+" I git rebase a lot so this is useful
+set autoread
+
+" other stuff
+set background=dark
+set expandtab
+set modeline
+set number
+
+syntax on
+filetype indent plugin on
+
+"""
+""" Javascript settings
+"""
+
+autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
+
+" prettier lint files on save
+autocmd BufWritePre *.js Neoformat
+autocmd BufWritePre *.jsx Neoformat
+autocmd FileType javascript set formatprg=prettier\ --stdin\ --single-quote=true\ --parser=babylon\ --bracket-spacing\ --print-width=100\ --tab-width=2\ --trailing-comma=es5
+let g:neoformat_try_formatprg = 1
+" if we want this to fire more often (on edits etc)
+" autocmd BufWritePre,TextChanged,InsertLeave *.js Neoformat
+
+"""
+""" Python Settings
+"""
+autocmd FileType python set shiftwidth=4 softtabstop=4 tabstop=4
+" highlight all python syntax
+let python_highlight_all = 1
+let g:syntastic_python_checkers=['flake8']
+
+
+""" HTML Settings
+" html autocomplete
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+
+
+
+
+" ctrl p settings
+let g:ctrlp_working_path_mode = 'a'
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+
+" nerd tree settings
+let NERDTreeIgnore = ['\.pyc$']
+map <C-n> :NERDTreeToggle<CR>
+
+" nerdcommneter settings
+
+""" Trim Whitespace on Save
+" White space noise
+function TrimWhiteSpace()
+    %s/\s*$//
+    ''
+:endfunction
+
+set list listchars=tab:»·,trail:·
+
+autocmd FileWritePre * call TrimWhiteSpace()
+autocmd FileAppendPre * call TrimWhiteSpace()
+autocmd FilterWritePre * call TrimWhiteSpace()
+autocmd BufWritePre * call TrimWhiteSpace()
+map <F2> :call TrimWhiteSpace()<CR>
+map! <F2> :call TrimWhiteSpace()<CR>
+
+
+""" Rainbow Parens Configs
+let g:rainbow_conf = {
+\   'guifgs': ['firebrick', 'seagreen3', 'darkorange3', 'royalblue3'],
+\   'ctermfgs': ['lightmagenta', 'lightblue', 'lightyellow', 'lightcyan'],
+\   'operators': '_,_',
+\   'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
+\   'separately': {
+\       '*': {},
+\       'tex': {
+\           'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
+\       },
+\       'lisp': {
+\           'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
+\       },
+\       'vim': {
+\           'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
+\       },
+\       'html': {
+\           'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
+\       },
+\       'css': 0,
+\   }
+\}
+
+
+" rainbow parenthesis
+let g:rainbow_active = 1
