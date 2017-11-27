@@ -1,0 +1,8 @@
+#!/bin/sh
+
+echo " *** setting up tmux noise *** "
+echo ""
+
+echo "   * .tmux.conf"
+cp ./tmux/tmux.conf ~/.tmux.conf
+
