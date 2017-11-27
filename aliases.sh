@@ -16,19 +16,15 @@ alias gtdf='git diff '
 alias branch='git rev-parse --abbrev-ref HEAD'
 
 # python
-alias ipy='ipython '
 alias pyserve='python -m SimpleHTTPServer '
+alias pyserve3='python -m http.server'
 alias wenv='source /usr/local/bin/virtualenvwrapper.sh'
 
 # vim
-alias mvim='mvim -v '
+alias mvim='mvim -v '                       # open mvim in visual mode OSX
+alias rmswp='rm -i `find . | grep .swp$`'   # to remove stray swapfiles
 
 # OSX
 alias beep='tput bel'
 alias chrome='open -a "Google Chrome" '
 alias cpwd='pwd | pbcopy'
-
-# project aliases
-alias bfmono='cd /opt/buzzfeed/mono && clear && echo "\nWelcome to" | lolcat && echo "MONO" | figlet | lolcat'
-
-alias rmswp='rm -i `find . | grep .swp$`'
