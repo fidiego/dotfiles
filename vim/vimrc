@@ -20,11 +20,11 @@ Bundle 'gmarik/vundle'
 Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'scrooloose/nerdtree'
 Bundle 'luochen1990/rainbow'
-Bundle 'kien/rainbow_parentheses'
 Bundle 'vim-syntastic/syntastic'
 Bundle 'plasticboy/vim-markdown'
 Bundle 'mxw/vim-jsx'
 Bundle 'pangloss/vim-javascript'
+Bundle 'kien/rainbow_parentheses.vim'
 
 """ General
 colorscheme monokai
