@@ -1,6 +1,13 @@
 #!/bin/sh
 
 echo ""
+echo " *** setting up zsh *** "
+echo "     ⚠️  this overrides ~/.zshrc *** "
+echo ""
+./scripts/setup_zsh
+
+
+echo ""
 echo " *** setting up vim configs *** "
 echo ""
 ./scripts/setup_vim
@@ -13,4 +20,4 @@ echo ""
 echo ""
 echo " *** setting up yubikey *** "
 echo ""
-./scripts/setup_yubikey
+./scripts/setup_yubi
