@@ -21,3 +21,10 @@ echo ""
 echo " *** setting up yubikey *** "
 echo ""
 ./scripts/setup_yubi
+
+
+echo ""
+echo " *** setting up gpg-agent: OS X *** "
+echo "     ⚠️  this overrides ~/.gnupg/gpg-agent.conf *** "
+echo ""
+./scripts/setup_gnupg

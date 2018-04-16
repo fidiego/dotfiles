@@ -1,0 +1,4 @@
+#!/bin/sh
+
+echo "   * .gnupg/gpg-agent.conf"
+cp ./gnupg/gpg-agent.conf ~/.gnupg/gpg-agent.conf
