@@ -1,3 +1,15 @@
+#!/bin/sh
+
+mkdir ~/.dotfiles
+cp ./aliases.sh ~/.dotfiles/aliases.sh
+cp ./yubikey/yubi-profile.sh ~/.dotfiles/yubi-profile.sh
+
+echo ""
+echo " *** setting up zsh *** "
+echo "     ⚠️  this overrides ~/.zshrc *** "
+echo ""
+./scripts/setup_zsh
+
 
 echo ""
 echo " *** setting up vim configs *** "
@@ -8,3 +20,15 @@ echo ""
 echo " *** setting up tmux configs *** "
 echo ""
 ./scripts/setup_tmux
+
+echo ""
+echo " *** setting up yubikey *** "
+echo ""
+./scripts/setup_yubi
+
+
+echo ""
+echo " *** setting up gpg-agent: OS X *** "
+echo "     ⚠️  this overrides ~/.gnupg/gpg-agent.conf *** "
+echo ""
+./scripts/setup_gnupg

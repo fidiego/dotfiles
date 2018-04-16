@@ -1,0 +1,5 @@
+#!/bin/sh
+
+echo "   * .zshrc"
+cp ./zsh/zshrc.sh ~/.zshrc
+cp ./zsh/my-theme.zsh-theme ~/.oh-my-zsh/themes/my-theme.zsh-theme
