@@ -1,7 +1,7 @@
 #!/bin/sh
 
 echo "   * yubi-profile.sh"
-cp ./yubikey/yubi-profile.sh ~/.yubi-profile.sh
+cp ./yubikey/yubi-profile.sh ~/.dotfiles/.yubi-profile
 
 echo "   * yubitouch.sh"
 cp ./yubikey/yubitouch.sh /usr/local/bin/yubitouch.sh

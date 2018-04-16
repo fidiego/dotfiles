@@ -1,5 +1,9 @@
 #!/bin/sh
 
+mkdir ~/.dotfiles
+cp ./aliases.sh ~/.dotfiles/aliases.sh
+cp ./yubikey/yubi-profile.sh ~/.dotfiles/yubi-profile.sh
+
 echo ""
 echo " *** setting up zsh *** "
 echo "     ⚠️  this overrides ~/.zshrc *** "
