@@ -1,0 +1,5 @@
+#!/bin/sh
+
+echo "   Yubikey Things and Such"
+cp ./yubikey/yubi-profile.sh ~/.yubi-profile.sh
+cp ./yubikey/yubitouch.sh /usr/local/bin/yubitouch.sh
