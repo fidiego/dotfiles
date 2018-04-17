@@ -1,0 +1,4 @@
+#!/bin/sh
+
+echo "   * .gitconfig"
+cp ./git/git.conf ~/.gitconfig

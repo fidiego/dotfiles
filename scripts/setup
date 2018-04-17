@@ -12,6 +12,12 @@ echo ""
 
 
 echo ""
+echo " *** setting up gitconfig *** "
+echo "     ⚠️  this overrides ~/gitconfig *** "
+echo ""
+./scripts/setup_git
+
+echo ""
 echo " *** setting up vim configs *** "
 echo ""
 ./scripts/setup_vim
