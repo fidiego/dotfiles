@@ -65,6 +65,7 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 source ~/.dotfiles/aliases.sh
 source ~/.dotfiles/yubi-profile.sh
+source ~/.dotfiles/paths.sh
 
 # User configuration
 
