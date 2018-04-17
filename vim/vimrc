@@ -17,14 +17,17 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " other plugins
+Bundle 'airblade/vim-gitgutter'
 Bundle 'christoomey/vim-tmux-navigator'
-Bundle 'scrooloose/nerdtree'
+Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'luochen1990/rainbow'
-Bundle 'vim-syntastic/syntastic'
-Bundle 'plasticboy/vim-markdown'
 Bundle 'mxw/vim-jsx'
 Bundle 'pangloss/vim-javascript'
-Bundle 'kien/rainbow_parentheses.vim'
+Bundle 'plasticboy/vim-markdown'
+Bundle 'prettier/vim-prettier'
+Bundle 'sbdchd/neoformat'
+Bundle 'scrooloose/nerdtree'
+Bundle 'vim-syntastic/syntastic'
 
 """ General
 colorscheme monokai
@@ -78,10 +81,21 @@ autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
 " prettier lint files on save
 autocmd BufWritePre *.js Neoformat
 autocmd BufWritePre *.jsx Neoformat
-autocmd FileType javascript set formatprg=prettier\ --stdin\ --single-quote=true\ --parser=babylon\ --bracket-spacing\ --print-width=100\ --tab-width=2\ --trailing-comma=es5
 let g:neoformat_try_formatprg = 1
-" if we want this to fire more often (on edits etc)
-" autocmd BufWritePre,TextChanged,InsertLeave *.js Neoformat
+let g:jsx_ext_required = 0
+
+" max line length that prettier will wrap on
+let g:prettier#config#print_width = 100
+let g:prettier#config#tab_width = 2
+let g:prettier#config#use_tabs = 'false'
+let g:prettier#config#semi = 'true'
+let g:prettier#config#single_quote = 'true'
+let g:prettier#config#bracket_spacing = 'false'
+let g:prettier#config#jsx_bracket_same_line = 'true'
+let g:prettier#config#trailing_comma = 'es5'
+let g:prettier#config#parser = 'flow'
+let g:prettier#config#config_precedence = 'prefer-file'
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md Prettier
 
 """
 """ Python Settings
