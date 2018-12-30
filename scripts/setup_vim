@@ -9,4 +9,8 @@ mkdir ~/.vim
 echo "   * .vimrc"
 cp ./vim/vimrc ~/.vimrc
 
+echo " installing theme"
+mkdir ~/.vim/colors
+cp ./vim/colors/monokai.vim ~/.vim/colors/
+
 ls ~/.vim
