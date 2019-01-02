@@ -18,6 +18,7 @@ Bundle 'gmarik/vundle'
 
 " other plugins
 Bundle 'airblade/vim-gitgutter'
+Bundle 'chr4/nginx.vim'
 Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'luochen1990/rainbow'
@@ -27,6 +28,7 @@ Bundle 'plasticboy/vim-markdown'
 Bundle 'prettier/vim-prettier'
 Bundle 'sbdchd/neoformat'
 Bundle 'scrooloose/nerdtree'
+Bundle 'stephpy/vim-yaml'
 Bundle 'vim-syntastic/syntastic'
 
 """ General
