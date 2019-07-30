@@ -113,9 +113,6 @@ let g:syntastic_python_checkers=['flake8']
 " html autocomplete
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 
-
-
-
 " ctrl p settings
 let g:ctrlp_working_path_mode = 'a'
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
