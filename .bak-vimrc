@@ -1,58 +1,63 @@
 " -----
 " .vimrc
 "
-" defines plugins
-" sets some language specific things like indenting and syntax highlighting
+" sets up vundle and install plugins
+" also sets some language specific
+" things like indenting and syntax highlighting
 "
 
 set nocompatible               " be iMproved
 filetype off                   " required!
 
-" Plug: package management
-call plug#begin('~/.vim/plugged')
+" Vundle: package management
+set rtp+=~/.vim/bundle/Vundle.vim/
+call vundle#rc()
 
-" plugins
-Plug 'airblade/vim-gitgutter'
-Plug 'chr4/nginx.vim'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'kien/rainbow_parentheses.vim'
-Plug 'luochen1990/rainbow'
-Plug 'mxw/vim-jsx'
-Plug 'pangloss/vim-javascript'
-Plug 'plasticboy/vim-markdown'
-Plug 'prettier/vim-prettier'
-Plug 'psf/black', { 'commit': 'ce14fa8b497bae2b50ec48b3bd7022573a59cdb1' }
-Plug 'sbdchd/neoformat'
-Plug 'scrooloose/nerdtree'
-Plug 'stephpy/vim-yaml'
-Plug 'vim-syntastic/syntastic'
+" somewhat meta
+Bundle 'gmarik/vundle'
 
-call plug#end()
+" other plugins
+Bundle 'airblade/vim-gitgutter'
+Bundle 'chr4/nginx.vim'
+Bundle 'christoomey/vim-tmux-navigator'
+Bundle 'fatih/vim-go'
+Bundle 'kien/rainbow_parentheses.vim'
+Bundle 'lepture/vim-jinja'
+Bundle 'luochen1990/rainbow'
+Bundle 'mxw/vim-jsx'
+Bundle 'pangloss/vim-javascript'
+Bundle 'plasticboy/vim-markdown'
+Bundle 'preservim/nerdcommenter'
+Bundle 'prettier/vim-prettier'
+Bundle 'sbdchd/neoformat'
+Bundle 'scrooloose/nerdtree'
+Bundle 'stephpy/vim-yaml'
+Bundle 'vim-scripts/django.vim'
+Bundle 'vim-syntastic/syntastic'
+
 
 """ General
-" colorscheme monokai
+colorscheme monokai
 
 
 " leader
 " follow the leader
 let mapleader = ","
 let g:mapleader = ","
-nnoremap <C-p> :GFiles<CR>
 
 " never in my life have i used ex mode
 " i'm not sure what it is and at this point i'm too afraid to ask
 nnoremap Q <nop>
-
-" backspace
-set backspace=indent,eol,start
+nnoremap q <nop>
 
 " ruler
 set ruler
 
 " set line under cursor
 set cursorline
+
+" set max col width
+set colorcolumn=100
 
 " copy to clipboard
 set clipboard=unnamed
@@ -77,6 +82,12 @@ set number
 
 syntax on
 filetype indent plugin on
+
+
+
+"""
+""" Jinja
+au BufNewFile,BufRead *.html,*.htm,*.shtml,*.stm,*.yaml set ft=jinja
 
 """
 """ Javascript settings
@@ -106,7 +117,6 @@ autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.gra
 """
 """ Python Settings
 """
-let g:black_virtualenv="~/.vim/black"
 autocmd FileType python set shiftwidth=4 softtabstop=4 tabstop=4
 " highlight all python syntax
 let python_highlight_all = 1
@@ -116,6 +126,7 @@ let g:syntastic_python_checkers=['flake8']
 """ HTML Settings
 " html autocomplete
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+" !tidy -mi -html -wrap 0 %
 
 " ctrl p settings
 let g:ctrlp_working_path_mode = 'a'
