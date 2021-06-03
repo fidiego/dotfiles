@@ -23,7 +23,7 @@ Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
 Plug 'plasticboy/vim-markdown'
 Plug 'prettier/vim-prettier'
-Plug 'psf/black', { 'commit': 'ce14fa8b497bae2b50ec48b3bd7022573a59cdb1' }
+Plug 'psf/black', { 'branch': 'stable' }
 Plug 'sbdchd/neoformat'
 Plug 'scrooloose/nerdtree'
 Plug 'stephpy/vim-yaml'
@@ -34,12 +34,15 @@ call plug#end()
 """ General
 " colorscheme monokai
 
-
 " leader
 " follow the leader
 let mapleader = ","
 let g:mapleader = ","
 nnoremap <C-p> :GFiles<CR>
+
+" coc
+nmap <leader>gd <Plug>(coc-definition)
+nmap <leader>gr <Plug>(coc-references)
 
 " never in my life have i used ex mode
 " i'm not sure what it is and at this point i'm too afraid to ask
@@ -106,11 +109,11 @@ autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.gra
 """
 """ Python Settings
 """
-let g:black_virtualenv="~/.vim/black"
 autocmd FileType python set shiftwidth=4 softtabstop=4 tabstop=4
 " highlight all python syntax
 let python_highlight_all = 1
 let g:syntastic_python_checkers=['flake8']
+autocmd BufWritePre *.py execute ':Black'
 
 
 """ HTML Settings
@@ -134,7 +137,8 @@ function TrimWhiteSpace()
     ''
 :endfunction
 
-set list listchars=tab:»·,trail:·
+set list listchars=tab:>-,trail:·
+" set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨
 
 autocmd FileWritePre * call TrimWhiteSpace()
 autocmd FileAppendPre * call TrimWhiteSpace()
