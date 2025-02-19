@@ -1,0 +1,15 @@
+theme = "Adventure"
+
+font-family  = ""
+font-family  = "PragmataPro Mono"
+font-size    = "17"
+font-thicken = true
+font-thicken-strength = 0
+# font-feature = -calt
+# font-feature = -liga
+font-feature = -dlig
+
+link     = ""
+link-url = true
+
+mouse-shift-capture = "always"
