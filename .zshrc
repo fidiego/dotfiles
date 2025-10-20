@@ -102,7 +102,7 @@ source "$HOME/.atuin/bin/env"
 eval "$(atuin init zsh --disable-up-arrow)"
 
 # Broot
-source /Users/fd/.config/broot/launcher/bash/br
+source /Users/`whoami`/.config/broot/launcher/bash/br
 
 #
 # aws cli: completions executed here something gets overwritten otherwise
