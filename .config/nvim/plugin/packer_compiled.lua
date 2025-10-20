@@ -49,8 +49,8 @@ local function save_profiles(threshold)
 end
 
 time([[Luarocks path setup]], true)
-local package_path_str = "/Users/fd/.cache/nvim/packer_hererocks/2.1.1734355927/share/lua/5.1/?.lua;/Users/fd/.cache/nvim/packer_hererocks/2.1.1734355927/share/lua/5.1/?/init.lua;/Users/fd/.cache/nvim/packer_hererocks/2.1.1734355927/lib/luarocks/rocks-5.1/?.lua;/Users/fd/.cache/nvim/packer_hererocks/2.1.1734355927/lib/luarocks/rocks-5.1/?/init.lua"
-local install_cpath_pattern = "/Users/fd/.cache/nvim/packer_hererocks/2.1.1734355927/lib/lua/5.1/?.so"
+local package_path_str = "/Users/fd/.cache/nvim/packer_hererocks/2.1.1748459687/share/lua/5.1/?.lua;/Users/fd/.cache/nvim/packer_hererocks/2.1.1748459687/share/lua/5.1/?/init.lua;/Users/fd/.cache/nvim/packer_hererocks/2.1.1748459687/lib/luarocks/rocks-5.1/?.lua;/Users/fd/.cache/nvim/packer_hererocks/2.1.1748459687/lib/luarocks/rocks-5.1/?/init.lua"
+local install_cpath_pattern = "/Users/fd/.cache/nvim/packer_hererocks/2.1.1748459687/lib/lua/5.1/?.so"
 if not string.find(package.path, package_path_str, 1, true) then
   package.path = package.path .. ';' .. package_path_str
 end
@@ -89,15 +89,21 @@ _G.packer_plugins = {
     path = "/Users/fd/.local/share/nvim/site/pack/packer/start/asyncomplete.vim",
     url = "https://github.com/prabirshrestha/asyncomplete.vim"
   },
-  black = {
+  ["avante.nvim"] = {
+    config = { "\27LJ\2\n¶\2\0\0\a\0\f\0\0156\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\n\0005\3\b\0005\4\6\0005\5\3\0005\6\4\0=\6\5\5=\5\a\4=\4\t\3=\3\v\2B\0\2\1K\0\1\0\topts\1\0\1\topts\0\14providers\1\0\1\14providers\0\vclaude\1\0\1\vclaude\0\23extra_request_body\1\0\2\16temperature\3\0\15max_tokens\3€ \1\0\5\ftimeout\3°ê\1\23extra_request_body\0\18disable_tools\2\nmodel\29claude-sonnet-4-20250514\rendpoint\30https://api.anthropic.com\nsetup\vavante\frequire\0" },
     loaded = true,
-    path = "/Users/fd/.local/share/nvim/site/pack/packer/start/black",
-    url = "https://github.com/psf/black"
+    path = "/Users/fd/.local/share/nvim/site/pack/packer/start/avante.nvim",
+    url = "https://github.com/yetone/avante.nvim"
   },
   ["cyberdream.nvim"] = {
     loaded = true,
     path = "/Users/fd/.local/share/nvim/site/pack/packer/start/cyberdream.nvim",
     url = "https://github.com/scottmckendry/cyberdream.nvim"
+  },
+  ["dressing.nvim"] = {
+    loaded = true,
+    path = "/Users/fd/.local/share/nvim/site/pack/packer/start/dressing.nvim",
+    url = "https://github.com/stevearc/dressing.nvim"
   },
   ["fern-mapping-fzf.vim"] = {
     loaded = true,
@@ -108,11 +114,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/fd/.local/share/nvim/site/pack/packer/start/fern-preview.vim",
     url = "https://github.com/yuki-yano/fern-preview.vim"
-  },
-  ["freeze-code.nvim"] = {
-    loaded = true,
-    path = "/Users/fd/.local/share/nvim/site/pack/packer/start/freeze-code.nvim",
-    url = "https://github.com/AlejandroSuero/freeze-code.nvim"
   },
   fzf = {
     loaded = true,
@@ -138,11 +139,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/fd/.local/share/nvim/site/pack/packer/start/guihua.lua",
     url = "https://github.com/ray-x/guihua.lua"
-  },
-  ["jedi-vim"] = {
-    loaded = true,
-    path = "/Users/fd/.local/share/nvim/site/pack/packer/start/jedi-vim",
-    url = "https://github.com/davidhalter/jedi-vim"
   },
   ["lualine.nvim"] = {
     loaded = true,
@@ -209,6 +205,11 @@ _G.packer_plugins = {
     path = "/Users/fd/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
+  ["render-markdown.nvim"] = {
+    loaded = true,
+    path = "/Users/fd/.local/share/nvim/site/pack/packer/start/render-markdown.nvim",
+    url = "https://github.com/MeanderingProgrammer/render-markdown.nvim"
+  },
   ["telescope-frecency.nvim"] = {
     loaded = true,
     path = "/Users/fd/.local/share/nvim/site/pack/packer/start/telescope-frecency.nvim",
@@ -218,6 +219,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/fd/.local/share/nvim/site/pack/packer/start/telescope-fzf-native.nvim",
     url = "https://github.com/nvim-telescope/telescope-fzf-native.nvim"
+  },
+  ["telescope-hierarchy.nvim"] = {
+    loaded = true,
+    path = "/Users/fd/.local/share/nvim/site/pack/packer/start/telescope-hierarchy.nvim",
+    url = "https://github.com/jmacadie/telescope-hierarchy.nvim"
   },
   ["telescope-tabs"] = {
     config = { "\27LJ\2\n@\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\19telescope-tabs\frequire\0" },
@@ -275,11 +281,6 @@ _G.packer_plugins = {
     path = "/Users/fd/.local/share/nvim/site/pack/packer/start/vim-helm",
     url = "https://github.com/towolf/vim-helm"
   },
-  ["vim-isort"] = {
-    loaded = true,
-    path = "/Users/fd/.local/share/nvim/site/pack/packer/start/vim-isort",
-    url = "https://github.com/fisadev/vim-isort"
-  },
   ["vim-just"] = {
     loaded = true,
     path = "/Users/fd/.local/share/nvim/site/pack/packer/start/vim-just",
@@ -320,6 +321,10 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
+-- Config for: avante.nvim
+time([[Config for avante.nvim]], true)
+try_loadstring("\27LJ\2\n¶\2\0\0\a\0\f\0\0156\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\n\0005\3\b\0005\4\6\0005\5\3\0005\6\4\0=\6\5\5=\5\a\4=\4\t\3=\3\v\2B\0\2\1K\0\1\0\topts\1\0\1\topts\0\14providers\1\0\1\14providers\0\vclaude\1\0\1\vclaude\0\23extra_request_body\1\0\2\16temperature\3\0\15max_tokens\3€ \1\0\5\ftimeout\3°ê\1\23extra_request_body\0\18disable_tools\2\nmodel\29claude-sonnet-4-20250514\rendpoint\30https://api.anthropic.com\nsetup\vavante\frequire\0", "config", "avante.nvim")
+time([[Config for avante.nvim]], false)
 -- Config for: telescope-tabs
 time([[Config for telescope-tabs]], true)
 try_loadstring("\27LJ\2\n@\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\19telescope-tabs\frequire\0", "config", "telescope-tabs")

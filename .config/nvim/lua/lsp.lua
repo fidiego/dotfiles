@@ -1,18 +1,43 @@
-local lspconfig = require("lspconfig")
-
-lspconfig.inlay_hints = {
+vim.lsp.config.inlay_hints = {
   enabled = true
 }
-lspconfig.codelens = {
+vim.lsp.config.codelens = {
   enabled = true
 }
 
-lspconfig.taplo.setup({})
-lspconfig.gopls.setup({})
-lspconfig.ts_ls.setup({})
-lspconfig.terraformls.setup({})
-lspconfig.tflint.setup({})
-lspconfig.jedi_language_server.setup{}
-lspconfig.lua_ls.setup({})
-lspconfig.helm_ls.setup({})
-lspconfig.bashls.setup({})
+vim.lsp.enable('taplo')
+-- vim.lsp.config.gopls.setup({})
+vim.lsp.enable('ts_ls')
+vim.lsp.enable('terraformls')
+vim.lsp.enable('tflint')
+-- vim.lsp.config.jedi_language_server.setup({})
+vim.lsp.enable('lua_ls')
+vim.lsp.enable('helm_ls')
+vim.lsp.enable('bashls')
+
+-- python: configure and enable
+vim.lsp.config('pyright', {
+  settings = {
+    pyright = {
+      -- Using Ruff's import organizer
+      disableOrganizeImports = true,
+    },
+    python = {
+      analysis = {
+        -- Ignore all files for analysis to exclusively use Ruff for linting
+        ignore = { '*' },
+      },
+    },
+  },
+})
+
+vim.lsp.config('ruff', {
+  init_options = {
+    settings = {
+      logLevel = 'debug',
+    }
+  },
+})
+
+vim.lsp.enable('pyright')
+vim.lsp.enable('ruff')

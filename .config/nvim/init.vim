@@ -1,15 +1,14 @@
 lua require('_plugins')
-lua require('init')
 lua require('telescope_init')
-lua require('ruff_lsp')
 lua require('treesitter_init')
 lua require('evil_lualine')
 lua require('config.autocmds')
 lua require('golang')
 lua require('lsp')
 lua require('cyberdream')
-lua require('screenshots')
+" lua require('screenshots')
 lua require('guihua')
+lua require('init')
 
 """
 """ Global Settings
@@ -66,26 +65,39 @@ augroup END
 "
 " Telescope
 "
-nnoremap <leader>gf <cmd>Telescope git_files<cr>
+" file find/nav
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-nnoremap <leader>gs <cmd>Telescope git_status<cr>
-nnoremap <leader>gr <cmd>Telescope lsp_references<cr>
-nnoremap <leader>gd <cmd>Telescope lsp_definitions<cr>
-nnoremap <leader>gy <cmd>Telescope lsp_type_definitions<cr>
-nnoremap <leader>gi <cmd>Telescope lsp_implementations<cr>
 nnoremap <leader>fr <cmd>Telescope frecency workspace=CWD<cr>
+" lsp
+nnoremap <leader>gd <cmd>Telescope lsp_definitions<cr>
+nnoremap <leader>gf <cmd>Telescope git_files<cr>
+nnoremap <leader>gi <cmd>Telescope lsp_implementations<cr>
+nnoremap <leader>gr <cmd>Telescope lsp_references<cr>
+nnoremap <leader>gs <cmd>Telescope git_status<cr>
+nnoremap <leader>gy <cmd>Telescope lsp_type_definitions<cr>
+nnoremap <leader>ghi <cmd>Telescope hierarchy incoming_calls<cr>
+nnoremap <leader>gho <cmd>Telescope hierarchy outgoing_calls<cr>
+" clipboard and tabs
 nnoremap <leader>nc <cmd>Telescope neoclip<cr>
 nnoremap <leader>tt <cmd>Telescope telescope-tabs list_tabs theme=cursor<cr>
 
 
+"
+" Render Markdown
+"
+nnoremap <leader>rd <cmd>:RenderMarkdown disable<cr>
+nnoremap <leader>re <cmd>:RenderMarkdown enable<cr>
+
 " LSP: standalones
 " most commands are run w/ telescope but there are a few we want to keep
 " available w/out <leader>
+nnoremap <leader>gD :tab lsp_definition<cr>
 autocmd FileType go nmap <buffer> gD :tab LspDefinition<cr>
 autocmd FileType go nmap <buffer> gd <plug>(lsp-definition)
+nnoremap <leader>gD :tab LspDefinition<cr>
 
 
 """
@@ -106,16 +118,13 @@ autocmd FileType go setlocal shiftwidth=4 tabstop=4
 augroup LspGo
   au!
   autocmd User lsp_setup call lsp#register_server({
-      \ 'name': 'go-lang',
+      \ 'name': 'gopls',
       \ 'cmd': {server_info->['gopls']},
       \ 'whitelist': ['go'],
       \ })
   autocmd FileType go setlocal omnifunc=lsp#complete
-  " autocmd FileType go nmap <buffer> gd <plug>(lsp-definition)
-  " autocmd FileType go nmap <buffer> gD :tab LspDefinition<cr>
-  " autocmd FileType go nmap <buffer> gr <plug>(lsp-references)
-  " autocmd FileType go nmap <buffer> gy <plug>(lsp-type-definition)
-  " autocmd FileType go nmap <buffer> gi <plug>(lsp-implementation)
+  autocmd FileType go nmap <tab> gD <plug>(lsp-definition)
+  autocmd FileType go nmap <buffer> gd <plug>(lsp-definition)
   autocmd FileType go nmap <buffer> ,n <plug>(lsp-next-error)
   autocmd FileType go nmap <buffer> ,p <plug>(lsp-previous-error)
 augroup END
@@ -125,16 +134,14 @@ augroup END
 """ Python Settings
 """
 augroup LspPython
-  let g:python3_host_prog = '/usr/local/bin/python3'
-  let g:black_use_virtualenv = 0
+  " let g:python3_host_prog = '/usr/local/bin/python3'
   " let g:vim_isort_python_version = 'python3'
-  " let g:vim_isort_config_overrides = {'profile': 'black'}
   " let g:syntastic_python_checkers=['flake8']
   aug python
       au!
-      autocmd BufWritePre *.py Isort
-      autocmd BufWritePre *.py Black
+      autocmd BufWritePre *.py Neoformat ruff
   aug END
+  "
   let g:jedi#use_tabs_not_buffers = 1
   let g:jedi#goto_command = "<leader>d"
   let g:jedi#goto_assignments_command = "<leader>g"
@@ -147,29 +154,6 @@ augroup LspPython
   let g:jedi#rename_command_keep_name = "<leader>R"
 augroup END
 
-
-"""
-""" terraform lsp
-"""
-if executable('terraform-ls')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'terraform-ls',
-        \ 'cmd': {server_info->['terraform-ls', 'serve']},
-        \ 'whitelist': ['terraform'],
-        \ })
-endif
-
-
-"""
-""" taplo lsp
-"""
-if executable('taplo')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'taplo-lsp',
-        \ 'cmd': {server_info->['taplo', 'lsp', 'stdio']},
-        \ 'whitelist': ['taplo'],
-        \ })
-endif
 
 
 """
@@ -203,7 +187,7 @@ let g:prettier#config#trailing_comma = 'es5'
 let g:prettier#config#parser = 'flow'
 let g:prettier#config#config_precedence = 'prefer-file'
 
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.mdx Prettier
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.mdx,*.tcss Prettier
 
 """
 """ Whitespace Settings
@@ -227,8 +211,3 @@ autocmd FilterWritePre * call TrimWhiteSpace()
 autocmd BufWritePre * call TrimWhiteSpace()
 map <F2> :call TrimWhiteSpace()<CR>
 map! <F2> :call TrimWhiteSpace()<CR>
-
-
-hi TabLine     guifg=DarkBlue  guibg=Gray     ctermfg=DarkBlue  ctermbg=Gray
-hi TabLineSel  guifg=Blue      guibg=Yellow   ctermfg=Blue      ctermbg=Yellow
-hi TabLineFill guifg=LightBlue guibg=DarkBlue ctermfg=LightBlue ctermbg=DarkBlue
