@@ -5,7 +5,7 @@ source ~/.dotfiles/zellij-completions.sh
 FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 
 # bun completions
-[ -s "/Users/fd/.bun/_bun" ] && source "/Users/fd/.bun/_bun"
+# [ -s "/Users/fd/.bun/_bun" ] && source "/Users/fd/.bun/_bun"
 
 # # fzf completions
 # source <(fzf --zsh)
@@ -14,4 +14,4 @@ FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 eval "$(zoxide init zsh)"
 
 # nuon
-source <(nuon completion zsh)
+# source <(nuon completion zsh)

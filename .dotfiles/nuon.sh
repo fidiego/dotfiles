@@ -7,12 +7,13 @@ export AWS_PROFILE=stage.NuonAdmin
 # nuon dev things
 export NUON_ROOT="/Users/fd/nuon/mono"
 export NUON_DISABLE_TELEMETRY="true"
-export NUON_API_TOKEN_DEV=`cat ~/.seed.yml | grep token | cut -d ' ' -f 2`
-export NUON_API_TOKEN_STAGE=`cat ~/.stage  | grep token | cut -d ' ' -f 2`
+export NUON_PREVIEW="true"
 
 # alias for mono repo
-alias mono="cd ~/nuon/mono && clear && figlet 'Nuon Mono' | lolcat"
-alias runner="cd ~/nuon/nuon-runner-go && clear && figlet 'Nuon Runner' | lolcat"
+alias mono="z ~/nuon/mono && clear && figlet 'Nuon Mono' | lolcat"
+alias byoc="z ~/nuon/byoc && clear && figlet 'BYOC ~= Nuon' | lolcat"
+alias demo="z ~/nuon/demo && clear && figlet 'demos' | lolcat"
+alias nuon-go="z ~/nuon/nuon-go && clear && figlet 'nuon-go' | lolcat"
 # alias nuondev="nuon -f ~/.seed.yml "  # superceded by nb
 # alias ns="nuon -f ~/.stage "
 
@@ -22,7 +23,24 @@ alias runner="cd ~/nuon/nuon-runner-go && clear && figlet 'Nuon Runner' | lolcat
 
 # good morning: sso login
 function gmnuon() {
-  reset="$1"
+  arg="$1"
+  if [ "$arg" = "--help" ]; then
+    echo "gmnuon [--reset-gen] [--all] [--keep-db]"
+  fi
+
+  # echo "$@"
+  # if [[ "$@" == "*--keep-db*" ]]; then
+  #   keep_db="true"
+  #   echo "will keep db"
+  # else
+  #   keep_db="false"
+  #   echo "won't keep db"
+  # fi
+
+  set -u
+  set -o pipefail
+  set -e
+
   mono
 
   figlet -f cybermedium "Init AWS" | lolcat
@@ -34,18 +52,21 @@ function gmnuon() {
   figlet -f cybermedium "go mod download" | lolcat
   go mod download
 
-  if [ "$reset" = "--reset-gen" ]; then
-    figlet -f cybermedium "Resetting Generated Code" | lolcat
+  if [ "$arg" = "--reset" ]; then
+    figlet -f pepper "Resetting Podman VM" | lolcat
+    nuonctl scripts exec reset-podman-vm
+
+    figlet -f pepper "Resetting Dependencies" | lolcat
+    nuonctl scripts exec reset-dependencies
+
+    figlet -f pepper "Resetting Generated Code" | lolcat
     nuonctl scripts exec reset-generated-code
   fi
 }
 
 # compile and run nounctl
 function nctl () {
-        cd ~/nuon/mono/bins/nuonctl
-        time go build -o /tmp/nctl .
-        cd - > /dev/null
-        /tmp/nctl "$@"
+        ~/nuon/mono/run-nuonctl.sh "$@"
 }
 
 # get token for env
@@ -65,8 +86,9 @@ function nuontoken() {
 
 # compile and run nuon
 function nb () {
+        mv /tmp/nb /tmp/nb-bak
         cd ~/nuon/mono/bins/cli
-        go build -o /tmp/nb .
+        /usr/bin/time -a -o ~/.scratch/builds/nb/`date -Idate`.txt go build -o /tmp/nb .
         cd - > /dev/null
         /tmp/nb -f ~/.seed.yml "$@"
 }
@@ -74,9 +96,17 @@ function nb () {
 # compile and run nuon w/ stage
 function ns () {
         cd ~/nuon/mono/bins/cli
-        go build -o /tmp/nb .
+        go build -o /tmp/ns .
         cd - > /dev/null
-        /tmp/nb -f ~/.stage "$@"
+        /tmp/ns -f ~/.stage "$@"
+}
+
+function aws_creds() {
+  path_to_file="$1"
+  AWS_ACCESS_KEY_ID=`cat $path_to_file     | jq -r '.Credentials.AccessKeyId'`
+  AWS_SECRET_ACCESS_KEY=`cat $path_to_file | jq -r '.Credentials.SecretAccessKey'`
+  AWS_SESSION_TOKEN=`cat $path_to_file     | jq -r '.Credentials.SessionToken'`
+  echo AWS_ACCESS_KEY_ID="$AWS_ACCESS_KEY_ID" AWS_SECRET_ACCESS_KEY="$AWS_SECRET_ACCESS_KEY" AWS_SESSION_TOKEN="$AWS_SESSION_TOKEN"
 }
 
 # function noun_env()
@@ -89,3 +119,5 @@ function ns () {
 #   nuon_org = $(cat $seed_file | grep org | cut -d ' ' -f 2)
 # }
 #
+#
+export NGROK_AUTHTOKEN=32MXnLwZFMxxgLbkUHEjH_5q9R4AdLbzWA7Y14sNtdK

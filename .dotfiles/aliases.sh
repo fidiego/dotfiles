@@ -17,7 +17,7 @@ alias lt='ls -Alth'
 alias ltr='ls -Altrh'
 
 # git
-alias branch='git rev-parse --abbrev-ref HEAD | echo -n'
+alias branch='echo -n `git rev-parse --abbrev-ref HEAD`'
 alias g='git '
 
 # python
@@ -59,7 +59,7 @@ alias gopass="_gopass "
 #
 # Github Functions
 #
-alias gitrmmerged='  git branch --merged | egrep -v "master|main" | xargs git branch -d'
+alias gitrmmerged='  git branch -r --merged main | egrep -v "master|main" | xargs git branch -d'
 
 #
 # cd with reminder
@@ -78,14 +78,33 @@ alias tfdb="TF_LOG=DEBUG terraform "
 
 
 ## log printer
-
 lugger() {
   while read -r line; do
+    local has_ter=`echo $line | grep ' terraform: '`
+    local has_del=`echo $line | grep ' -> '`
     local first_ch=`printf "%.2s" "$line"`
     if [ "$first_ch" = "{\"" ]; then
-      # TODO: escape newlines
+      # the line is pure json
       newline=`echo -n $line | perl -pe's/[\x00-\x1F]/ sprintf "\\u%04X", ord $& /eg'`
       (jq --color-output --sort-keys <<< $newline || jq -R '. as $line | try (fromjson) catch $line' <<< $newline ) || echo '::> '$line
+    elif [ "$has_ter" ]; then
+      # the line is terraform
+      newline="${line#* terraform: }"
+      local first_chn=`printf "%.2s" "$newline"`
+      if [ "$first_chn" = "{\"" ]; then
+        (jq --color-output --sort-keys <<< $newline || jq -R '. as $line | try (fromjson) catch $line' <<< $newline ) || echo '::> '$newline
+      else
+        echo $line
+      fi
+    elif [ "$has_del" ]; then
+      # the line is -> delimited
+      newline="${line#* -> }"
+      local first_chn=`printf "%.2s" "$newline"`
+      if [ "$first_chn" = "{\"" ]; then
+        (jq --color-output --sort-keys <<< $newline || jq -R '. as $line | try (fromjson) catch $line' <<< $newline ) || echo '::> '$newline
+      else
+        echo $line
+      fi
     else
       echo $line
     fi

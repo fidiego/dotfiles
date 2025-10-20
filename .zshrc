@@ -69,6 +69,7 @@ HISTIGNORE="clear:git st:ls:git pup:mono"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
+  zsh-vim-mode
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -93,6 +94,7 @@ source ~/.dotfiles/aliases.sh
 source ~/.dotfiles/envs.sh
 source ~/.dotfiles/completions.sh
 source ~/.dotfiles/nuon.sh
+source ~/.dotfiles/ai.sh
 
 
 # Atuin
@@ -106,3 +108,13 @@ source /Users/fd/.config/broot/launcher/bash/br
 # aws cli: completions executed here something gets overwritten otherwise
 #
 source ~/.local/bin/aws_zsh_completer.sh
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# enable ssh agent
+if [ -z "$SSH_AUTH_SOCK" ] ; then
+    eval `ssh-agent`
+    ssh-add
+fi
