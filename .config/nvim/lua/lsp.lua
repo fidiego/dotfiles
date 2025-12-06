@@ -41,3 +41,10 @@ vim.lsp.config('ruff', {
 
 vim.lsp.enable('pyright')
 vim.lsp.enable('ruff')
+
+-- vim.lsp.enable("nuon")
+-- vim.lsp.start({
+--   name = "nuon",
+--   cmd = { "/Users/fd/.local/bin/nuon-lsp" },  -- Update with your actual path
+--   root_dir = vim.fn.getcwd()
+-- })
