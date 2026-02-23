@@ -5,14 +5,28 @@ export AWS_REGION=us-west-2
 export AWS_PROFILE=stage.NuonAdmin
 
 # nuon dev things
-export NUON_ROOT="/Users/fd/nuon/mono"
+export NUON_ROOT="/Users/fd/nuon/"
 export NUON_DISABLE_TELEMETRY="true"
 export NUON_PREVIEW="true"
 
+# ASCII
+function nuon_logo() {
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░"
+  echo "▒▒▒ ███╗   ██╗██╗   ██╗ ██████╗ ███╗   ██╗ ▒▒▒"
+  echo "▓▓▓ ████╗  ██║██║   ██║██╔═══██╗████╗  ██║ ▓▓▓"
+  echo "███ ██╔██╗ ██║██║   ██║██║   ██║██╔██╗ ██║ ███"
+  echo "▓▓▓ ██║╚██╗██║██║   ██║██║   ██║██║╚██╗██║ ▓▓▓"
+  echo "▒▒▒ ██║ ╚████║╚██████╔╝╚██████╔╝██║ ╚████║ ▒▒▒"
+  echo "░░░ ╚═╝  ╚═══╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝ ░░░"
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░"
+}
+
 # alias for mono repo
-alias mono="z ~/nuon/mono && clear && figlet 'Nuon Mono' | lolcat"
+alias mono="z ~/nuon/mono && clear && nuon_logo | lolcat"
+alias nuondir="z ~/nuon/mono && clear && nuon_logo | lolcat"
 alias byoc="z ~/nuon/byoc && clear && figlet 'BYOC ~= Nuon' | lolcat"
 alias demo="z ~/nuon/demo && clear && figlet 'demos' | lolcat"
+alias examples="z ~/nuon/example-app-configs && clear && figlet -f ogre 'Example' |lolcat && figlet -f ogre 'App Configs' | lolcat"
 alias nuon-go="z ~/nuon/nuon-go && clear && figlet 'nuon-go' | lolcat"
 # alias nuondev="nuon -f ~/.seed.yml "  # superceded by nb
 # alias ns="nuon -f ~/.stage "
@@ -86,6 +100,7 @@ function nuontoken() {
 
 # compile and run nuon
 function nb () {
+        echo "you probably want to use nuon-dev via \`nctl dev --dev cli --skip-all \`"
         mv /tmp/nb /tmp/nb-bak
         cd ~/nuon/mono/bins/cli
         /usr/bin/time -a -o ~/.scratch/builds/nb/`date -Idate`.txt go build -o /tmp/nb .
@@ -118,6 +133,3 @@ function aws_creds() {
 #   nuon_api_token = $(cat $seed_file | grep "api_token" |  cut -d ' ' -f 2)
 #   nuon_org = $(cat $seed_file | grep org | cut -d ' ' -f 2)
 # }
-#
-#
-export NGROK_AUTHTOKEN=32MXnLwZFMxxgLbkUHEjH_5q9R4AdLbzWA7Y14sNtdK

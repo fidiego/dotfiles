@@ -1,4 +1,4 @@
-export EDITOR="nvim"
+# export EDITOR="nvim" # set in .zshrc
 export K9S_EDITOR="nvim"
 
 #

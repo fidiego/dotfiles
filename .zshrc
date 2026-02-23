@@ -15,7 +15,7 @@ export ZSH=~/.oh-my-zsh
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="nuon"
+# ZSH_THEME="my-theme"
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -102,7 +102,7 @@ source "$HOME/.atuin/bin/env"
 eval "$(atuin init zsh --disable-up-arrow)"
 
 # Broot
-source /Users/`whoami`/.config/broot/launcher/bash/br
+source "$HOME/.config/broot/launcher/bash/br"
 
 #
 # aws cli: completions executed here something gets overwritten otherwise
@@ -118,3 +118,6 @@ if [ -z "$SSH_AUTH_SOCK" ] ; then
     eval `ssh-agent`
     ssh-add
 fi
+
+# Amp CLI
+export PATH="/Users/fd/.amp/bin:$PATH"

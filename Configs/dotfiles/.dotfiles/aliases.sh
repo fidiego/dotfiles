@@ -35,6 +35,9 @@ alias chrome='open -a "Google Chrome" '
 alias cpwd='pwd | pbcopy'
 
 
+# tailscale:
+# alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+
 # utils
 alias code="clear && cd ~/code && figlet 'fd.code' | lolcat"
 #
@@ -118,3 +121,8 @@ alias ghostty="/Applications/Ghostty.app/Contents/MacOS/ghostty"
 
 # used like this: `git co -b branch-name-`timestamp`
 alias timestamp="date -Iminutes | sed 's/://g' | sed 's/-//g'"
+
+sortcomdel() {
+  local cdl=$1
+  echo "$1" | tr ',' '\n' | sort | awk 'NR>1{printf ","} {printf "%s",$0} END{print ""}'
+}

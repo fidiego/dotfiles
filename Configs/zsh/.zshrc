@@ -7,7 +7,12 @@ export ZSH=~/.oh-my-zsh
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="my-theme"
+
+if [[ "$USER" == "fd" ]]; then
+  ZSH_THEME="nuon"
+else
+  ZSH_THEME="my-theme"
+fi
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -58,14 +63,18 @@ ZSH_THEME="my-theme"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
+# fpath must be set before oh-my-zsh runs compinit
+fpath=($HOME/.dotfiles/zsh-completions $fpath)
+
 plugins=(
   git
 )
 
 source $ZSH/oh-my-zsh.sh
 source ~/.dotfiles/aliases.sh
-source ~/.dotfiles/yubi-profile.sh
 source ~/.dotfiles/paths.sh
+source ~/.dotfiles/nuon.sh
+source ~/.dotfiles/envs.sh
 
 # User configuration
 
@@ -78,7 +87,7 @@ source ~/.dotfiles/paths.sh
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
-  export EDITOR='mvim'
+  export EDITOR='nvim'
 fi
 
 # Compilation flags

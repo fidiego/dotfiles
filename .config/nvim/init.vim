@@ -84,6 +84,9 @@ nnoremap <leader>gho <cmd>Telescope hierarchy outgoing_calls<cr>
 nnoremap <leader>nc <cmd>Telescope neoclip<cr>
 nnoremap <leader>tt <cmd>Telescope telescope-tabs list_tabs theme=cursor<cr>
 
+nnoremap <leader>yl :exe '!echo -n ' . expand('%') . ':' . line('.') . ' \| pbcopy'<CR>
+nnoremap <leader>yf :exe '!echo -n ' . expand('%') ' \| pbcopy'<CR>
+
 
 "
 " Render Markdown
