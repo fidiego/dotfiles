@@ -76,6 +76,9 @@ source ~/.dotfiles/paths.sh
 source ~/.dotfiles/nuon.sh
 source ~/.dotfiles/envs.sh
 
+# zoxide
+eval "$(zoxide init zsh)"
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -95,3 +98,5 @@ fi
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
+
+eval "$(atuin init zsh)"
